@@ -1,0 +1,9 @@
+@media screen and (max-width: 650px) {
+    #app-container {
+        overflow: hidden;
+        width: 99%;
+        margin-left: 7px;
+        /* margin-right: 0; */
+    }
+
+}

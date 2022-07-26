@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%=title%>
+    </title>
+    <!--adding the style sheet-->
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/homeResponsive.css">
+</head>
+
+<body>
+    <div id="app-container">
+        <!--header of the app-->
+        <h1>RightAWayToDO</h1>
+        <a id="today-list">
+            <div class="current-page">TODAY
+                <script>var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
+
+                    today = dd + '/' + mm + '/' + yyyy;
+                    document.write(today);</script>
+            </div>
+        </a>
+
+        <a href="/" id="planned-list" style="text-decoration:none; color:darkslategray;">
+            <div class="sec-page">CHECKLIST</div>
+        </a>
+
+
+        <hr solid 2px lavenderbush>
+        <!--form to create a task-->
+        <form action="/create-today" method="POST" id="form1">
+            <div id="des-cnt">
+                <input type="text" name="description" id="description" placeholder="What do you wanna do?" required>
+            </div>
+            <hr solid 2px lavenderblush>
+            <div id="catdate">
+                <div id="cat-cnt">
+                    <span>Choose a category:</span>
+                    <select type="text" name="category" id="category" required>
+                        <option value="school">school</option>
+                        <option value="college">College</option>
+                        <option value="work">Work</option>
+                        <option value="personal">Personal</option>
+                    </select>
+                </div>
+                <!-- <div id="due-date-cnt">
+                    <span>Due date?</span>
+                    <input type="date" name="date" id="date">
+                </div> -->
+
+            </div>
+
+            <div id="addtaskbutton">
+                <hr solid 2px lavenderblush>
+                <button type="submit">AddTask</button>
+            </div>
+            <hr solid 2px lavenderblush>
+        </form>
+
+        <!--Displaying the tasks created as a card showing the description date and the category of the task along with a delete button to delete the task-->
+        <div id="task-display">
+            <ul>
+                <!-- <div class="card"> -->
+                <%for( let i of tasks){%>
+                    <div class="card">
+                        <div id="block1">
+                            <input type="checkbox" id="work-done">
+                            <span>
+                                <%=i.description%>
+                            </span>
+                            <!-- <p>
+                                <%=i.date%>
+                            </p> -->
+                        </div>
+                        <div id="block2">
+                            <!--displaying category of the task as a button-->
+                            <button class="category-button">
+                                <%=i.category%>
+                            </button>
+                            <!--delete button-->
+                            <a href="/delete-today/?id=<%=i._id%>"><button id="delete">Delete</button></a>
+                        </div>
+
+                    </div>
+                    <hr solid 2px lavenderblush>
+                    <%}%>
+
+                        <!-- </div> -->
+            </ul>
+        </div>
+    </div>
+    <!--script to add some events-->
+    <script type="text/javascript" src="/js/home.js"></script>
+</body>
+
+</html>
